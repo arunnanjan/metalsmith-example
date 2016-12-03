@@ -3,7 +3,8 @@
  */
 var metalsmith = require('metalsmith'),
     layouts = require('metalsmith-layouts'),
-    markdown = require('metalsmith-markdownit');
+    markdown = require('metalsmith-markdownit'),
+    sass = require('metalsmith-sass');
 
 /*
  * Start the metalsmith build pipeline.  Give it the current directory to work with.
@@ -25,6 +26,13 @@ metalsmith(__dirname)
    * And where to place the build artifacts
    */
   .destination('build')
+  /*
+   * Generate stylesheets.
+   */
+  .use(sass({
+    outputDir: 'assets/css',
+    outputStyle: 'expanded'
+  }))
   /*
    * Process our markdown.
    */
